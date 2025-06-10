@@ -120,3 +120,5 @@ dist
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Node
 .DS_Store
 
+# Ignore upload folder where actual files are stored locally (backend/uploads)
+uploads/
