@@ -51,53 +51,11 @@ Frontend runs at `http://localhost:3000/`; frontend will call backend’s API at
 
 ---
 
-## ☁️ Deployment Instructions
-
-### Heroku
-
-1. Create separate Heroku apps for client and server.
-2. In **server**, add a `Procfile`:
-   ```
-   web: node server.js
-   ```
-3. Set config vars:
-   ```
-   DATABASE=<MongoDB URI>
-   JWT_SECRET=<YourJWTSecret>
-   PASSWORD=<AdminPassword>
-   ```
-4. Push and deploy.
-
-5. In **client**, create `.env`:
-   ```
-   REACT_APP_API=<server-app-url>/api
-   ```
-6. Add `Procfile`:
-   ```
-   web: npm start
-   ```
-7. Push and deploy.
-
-### Render
-
-Follow a similar config using separate services for server (Web Service) and client (Static Site).  
-Set environmental variables accordingly: `DATABASE`, `JWT_SECRET`, `PASSWORD`, and `REACT_APP_API`.
-
----
-
 ## 🛠 Usage Guide
 
 - Visit the site and navigate through blog posts.
 - Log in as **user** using the predefined password.
 - Access dashboard to **Create**, **Edit**, and **Delete** posts using the editor interface.
-
----
-
-## 🙋‍♂️ Author
-
-**Dhruv Kapadia**  
-📧 dhruvvv099@gmail.com  
-🔗 [LinkedIn](https://in.linkedin.com/in/dhruv-kapadia03)
 
 ---
 
