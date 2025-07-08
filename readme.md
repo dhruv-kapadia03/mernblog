@@ -56,9 +56,3 @@ Frontend runs at `http://localhost:3000/`; frontend will call backend’s API at
 - Visit the site and navigate through blog posts.
 - Log in as **user** using the predefined password.
 - Access dashboard to **Create**, **Edit**, and **Delete** posts using the editor interface.
-
----
-
-## 📄 License
-
-This project is released under the **MIT License**.
