@@ -1,4 +1,4 @@
-# MERN Blog 🌐
+# 🌐 MERN Blog 
 
 A full-stack blog application built with the MERN stack (MongoDB, Express.js, React, Node.js). Features include with a rich text editor for creating, updating, and deleting blog posts.
 
@@ -20,8 +20,8 @@ A full-stack blog application built with the MERN stack (MongoDB, Express.js, Re
 | Layer      | Technology                 |
 |------------|----------------------------|
 | Database   | MongoDB                    |
-| API        | Node.js + Express.js       |
-| Frontend   | React (with ReactQuill)    |
+| Backend    | Node.js + Express.js       |
+| Frontend   | React (CRA & ReactQuill)   |
 
 ---
 
@@ -51,8 +51,47 @@ Frontend runs at `http://localhost:3000/`; frontend will call backend’s API at
 
 ---
 
-## 🛠 Usage Guide
+## 📝 Project Structure
 
-- Visit the site and navigate through blog posts.
+```
+mernblog/
+├── backend/
+│   ├── models/
+│   │   ├── Post.js       
+│   │   └── User.js
+│   ├── upload_new/
+│   ├── index.js
+│   ├── .env
+│   ├── .gitignore
+│   ├── package-lock.json
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── pages/
+│   │   ├── App.css
+│   │   ├── App.js
+│   │   ├── App.test.js
+│   │   ├── Editor.js
+│   │   ├── Header.js
+│   │   ├── Layout.js
+│   │   ├── Post.js
+│   │   ├── UserContext.js
+│   │   ├── index.css
+│   │   ├── index.js
+│   │   └── logo.svg
+│   ├── .gitignore     
+│   ├── README.md
+│   ├── package-lock.json
+│   └── package.json
+└── README.md  
+```
+
+---
+
+## 🛠 Usage Guide 
+
+- Open the site in local machine after making and navigate through blog posts.
 - Log in as **user** using the predefined password.
 - Access dashboard to **Create**, **Edit**, and **Delete** posts using the editor interface.
