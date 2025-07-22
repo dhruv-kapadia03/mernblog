@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom"; 
 import {formatISO9075} from "date-fns";
 import {UserContext} from "../UserContext";
 
@@ -7,22 +7,60 @@ export default function PostPage() {
     const [postInfo, setPostInfo] = useState(null); 
     const {userInfo} = useContext(UserContext);
     const {id} = useParams();
+    const navigate = useNavigate(); 
+
     useEffect(() => {
         fetch(`http://localhost:4000/post/${id}`).then(response => {
+            if (!response.ok) { 
+                console.error('Failed to fetch post:', response.statusText);
+                setPostInfo(null); 
+                return;
+            }
             response.json().then(postInfo => {
                 setPostInfo(postInfo);
+            }).catch(error => {
+                console.error('Error parsing JSON:', error);
             });
+        }).catch(error => {
+            console.error('Error fetching post:', error);
         });
-    }, []);
+    }, [id]); 
 
-    if (!postInfo) return '';
+    async function handleDeletePost() {
+        if (!window.confirm("Are you sure you want to delete this post?")) {
+            return; 
+        }
+
+        try {
+            const response = await fetch(`http://localhost:4000/post/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include', 
+            });
+
+            if (response.ok) {
+                alert('Post deleted successfully!');
+                navigate('/'); 
+            } else {
+                const errorData = await response.json(); 
+                alert(`Failed to delete post: ${errorData.message || response.statusText}`); 
+            }
+        } catch (error) {
+            console.error('Error deleting post:', error);
+            alert('An error occurred while deleting the post.');
+        }
+    }
+
+    if (!postInfo) return 'Loading...'; 
 
     return(
         <div className="post-page">
             <h1>{postInfo.title}</h1>
             <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
             <div className="author">by @{postInfo.author.username}</div>
-            {userInfo.id === postInfo.author._id && (
+            {userInfo?.id === postInfo.author._id && ( 
                 <div className="edit-row">
                     <Link className="edit-btn" to={`/edit/${postInfo._id}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -30,6 +68,12 @@ export default function PostPage() {
                         </svg>
                         Edit this post
                     </Link>
+                    <button className="delete-btn" onClick={handleDeletePost}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0-.352-9m1.54-9a.75.75 0 0 0-.75.75V5.25h-3a.75.75 0 0 0 0 1.5h3v9a2.25 2.25 0 0 0 2.25 2.25h5.25a2.25 2.25 0 0 0 2.25-2.25v-9h3a.75.75 0 0 0 0-1.5h-3V5.25a.75.75 0 0 0-.75-.75h-7.5ZM5.25 5.25c0-.414.336-.75.75-.75h12a.75.75 0 0 1 .75.75v1.5h-13.5v-1.5Z" />
+                        </svg>
+                        Delete this post
+                    </button>
                 </div>
             )}
             <div className="image">
