@@ -15,6 +15,11 @@ A full-stack blog application built with the MERN stack (MongoDB, Express.js, Re
 
 ---
 
+### 🔹 Blog App
+[![Blog App Demo](https://img.icons8.com/clouds/100/000000/video-playlist.png)](https://res.cloudinary.com/drm14e8mg/video/upload/Blog_App_f4hvr8.mp4)
+
+---
+
 ## 📚 Tech Stack
 
 | Layer      | Technology                 |
